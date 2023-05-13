@@ -30,13 +30,13 @@ public class YearServiceTest {
         year2004.setYear(2004);
         year2004.setTypeOfYear("Leap year");
 
-        year2001.setYear(2004);
+        year2001.setYear(2001);
         year2001.setTypeOfYear("Not a leap year");
 
-        year2000.setYear(2004);
+        year2000.setYear(2000);
         year2000.setTypeOfYear("Leap year");
 
-        year1900.setYear(2004);
+        year1900.setYear(1900);
         year1900.setTypeOfYear("Not a leap year");
 
         return List.of(year2004, year2001, year2000, year1900);

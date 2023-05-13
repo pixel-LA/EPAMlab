@@ -1,6 +1,5 @@
 package com.epamlab.mylab.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,6 @@ import com.epamlab.mylab.service.YearService;
 public class YearController {
     private static final Logger log = LoggerFactory.getLogger(YearController.class);
 
-    @Autowired
     private YearService yearService;
 
     @GetMapping("/year")
@@ -31,7 +29,7 @@ public class YearController {
             if (yearNum < 1582) {
                 throw new CalendarRelevanceException("The Gregorian calendar was introduced in 1582.");
             }  
-            return ResponseEntity.ok(yearService.yearTypeDefinition(yearNum));
+            return ResponseEntity.ok().body(yearService.yearTypeDefinition(yearNum));
         }   catch (CalendarRelevanceException e) {
             log.error(e.getMessage());
             return ResponseEntity.internalServerError().body(e.getMessage());          
