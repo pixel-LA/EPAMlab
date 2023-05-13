@@ -7,30 +7,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.epamlab.mylab.exception.CalendarRelevanceException;
 import com.epamlab.mylab.service.YearService;
+
 
 
 @RestController
 @RequestMapping
 public class YearController {
-    
+    private static final Logger log = LoggerFactory.getLogger(YearController.class);
+
     @Autowired
     private YearService yearService;
 
     @GetMapping("/year")
-    public ResponseEntity getTypeOfYear(@RequestParam(name = "year", required = false, defaultValue = "") String year) {
-        try {
-            return ResponseEntity.ok(yearService.yearTypeDefinition(Integer.parseInt(year)));
-        } catch (CalendarRelevanceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } 
+    public ResponseEntity<?> getTypeOfYear(@RequestParam(name = "year", required = false, defaultValue = "") String year) {
         
-        // catch (NumberFormatException e) {
-        //     return ResponseEntity.badRequest().body("Проверьте правильность введенных данных.");
-        catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Упс... 500 ОШИБКА");
+        try {
+            Integer yearNum = Integer.parseInt(year);
+            if (yearNum < 1582) {
+                throw new CalendarRelevanceException("The Gregorian calendar was introduced in 1582.");
+            }  
+            return ResponseEntity.ok(yearService.yearTypeDefinition(yearNum));
+        }   catch (CalendarRelevanceException e) {
+            log.error(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());          
+        }   catch (NumberFormatException e) {
+            log.error(e.getMessage());
+            return ResponseEntity.badRequest().body("Check the correctness of the entered data.");
         }
     }
-    
 }
