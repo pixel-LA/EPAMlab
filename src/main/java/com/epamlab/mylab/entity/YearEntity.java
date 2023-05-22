@@ -1,34 +1,33 @@
 package com.epamlab.mylab.entity;
 
+import jakarta.persistence.*;
 
-public class YearEntity {
+
+@Entity
+@Table(name = "years")
+
+public class YearEntity implements Comparable<YearEntity> {
     
-    // private Long id;
-    private int year;
+    @Id
+    private Long id;
+    @Column(name = "year", nullable = false)
+    private Integer year;
+    @Column(name = "typeOfString", nullable = false)
     private String typeOfYear;
       
-    public YearEntity() {
-    }
-    
-    public YearEntity(int year, String typeOfYear) {
-        this.year = year;
-        this.typeOfYear = typeOfYear;
+    public void setId(Long id) {
+        this.id = id;
     }
 
+    public Long getId() {
+        return id;
+    }
 
-    // public Long getId() {
-    //     return id;
-    // }
-
-    // public void setId(Long id) {
-    //     this.id = id;
-    // }
-
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
     
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
@@ -38,6 +37,17 @@ public class YearEntity {
 
     public void setTypeOfYear(String typeOfYear) {
         this.typeOfYear = typeOfYear;
+    }   
+
+    @Override
+    public int compareTo(YearEntity yearEntity) {
+        return this.getYear()
+                .compareTo(yearEntity.getYear());
     }
-    
+
+    @Override
+    public String toString() {
+        return "Converter{" + ", input=" + year
+                +  ", typeOfYear=" + typeOfYear + '}';
+    }
 }
