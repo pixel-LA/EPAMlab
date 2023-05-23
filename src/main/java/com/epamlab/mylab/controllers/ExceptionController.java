@@ -15,7 +15,7 @@ public class ExceptionController {
     
     @ExceptionHandler(value = CalendarRelevanceException.class)
     public ResponseStatusException negativeException() {
-        log.error("Error: The Gregorian calendar was introduced in 1582.");
+        log.error("Error: The Gregorian calendar was introduced in 1582");
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Gregorian calendar was introduced in 1582.");
     }
 

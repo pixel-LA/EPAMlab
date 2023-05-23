@@ -17,7 +17,7 @@ public class CacheService {
     public void putCache(YearEntity object) {
         this.cache.put(object.getYear(), object);
     }
-
+    
     public Boolean contains(Integer value) {
         return this.cache.containsKey(value);
     }

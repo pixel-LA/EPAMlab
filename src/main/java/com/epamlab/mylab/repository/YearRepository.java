@@ -8,5 +8,7 @@ import com.epamlab.mylab.entity.YearEntity;
 
 @Repository
 public interface YearRepository extends JpaRepository<YearEntity, Long> {
+
     YearEntity findByYear(Integer year);
+    
 }

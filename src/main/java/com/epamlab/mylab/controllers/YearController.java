@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.epamlab.mylab.entity.CounterThreadEntity;
 import com.epamlab.mylab.entity.YearEntity;
-import com.epamlab.mylab.entity.YearEntityLogic;
+import com.epamlab.mylab.service.YearEntityLogic;
 import com.epamlab.mylab.service.YearService;
 import com.epamlab.mylab.service.cache.CacheService;
 

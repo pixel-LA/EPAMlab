@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.epamlab.mylab.entity.YearEntity;
-import com.epamlab.mylab.entity.YearEntityLogic;
 import com.epamlab.mylab.repository.YearRepository;
 
 @Service

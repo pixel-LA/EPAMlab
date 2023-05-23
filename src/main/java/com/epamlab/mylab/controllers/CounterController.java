@@ -24,4 +24,5 @@ public class CounterController {
         log.info("Get counter");
         return new ResponseEntity<>(CounterEntity.getCounter(), HttpStatus.OK);
     }
+    
 }

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "years")
-
 public class YearEntity implements Comparable<YearEntity> {
     
     @Id

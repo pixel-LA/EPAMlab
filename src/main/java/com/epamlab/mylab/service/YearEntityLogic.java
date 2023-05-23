@@ -1,5 +1,6 @@
-package com.epamlab.mylab.entity;
+package com.epamlab.mylab.service;
 
+import com.epamlab.mylab.entity.YearEntity;
 import com.epamlab.mylab.exception.CalendarRelevanceException;
 
 public class YearEntityLogic {
