@@ -87,15 +87,6 @@ public class YearController {
         return new ResponseEntity<>(yearEntity, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/getFromDBByInput")
-    public ResponseEntity<?> getFromDBByInput(@RequestParam(value="year", defaultValue = "") Integer value) {
-        YearEntity yearEntity = yearService.getYearType(value);
-        if (yearEntity == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(yearEntity, HttpStatus.OK);
-    }
-
     public void saveToDatabase(List<YearEntity> answers) {
         for (YearEntity answer : answers) {
             yearService.findOrCreateByInput(answer.getYear());
@@ -104,20 +95,12 @@ public class YearController {
 
     public List<YearEntity> processData(List<String> values) {
         List<Integer> valuesParsed = values.stream().map(YearEntityLogic::parseData).toList();
-        return Stream.concat(
-                        valuesParsed.stream()
-                                .filter(value -> cache.contains(value))
-                                .map(value -> cache.getCache(value)),
-                        valuesParsed.stream()
-                                .filter(value -> !cache.contains(value))
-                                .map(value -> {
-                                    YearEntity yearEntity = new YearEntity();
-                                    YearEntityLogic.setAll(yearEntity, value);
-                                    cache.putCache(yearEntity);
-                                    return yearEntity;
-                                })
-                )
-                .sorted()
-                .toList();
+        return Stream.concat(   valuesParsed.stream().filter(value -> cache.contains(value)).map(value -> cache.getCache(value)),
+                                valuesParsed.stream().filter(value -> !cache.contains(value)).map(value -> {YearEntity yearEntity = new YearEntity();
+                                                                                                            YearEntityLogic.setAll(yearEntity, value);
+                                                                                                            cache.putCache(yearEntity);
+                                                                                                            return yearEntity;
+                                                                                                            })
+                            ).sorted().toList();
     }
 }

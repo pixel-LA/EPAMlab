@@ -33,6 +33,6 @@ public class YearEntityLogic {
     public static void setAll(YearEntity yearEntity, Integer value) {
         yearEntity.setYear(value);
         yearEntity.setTypeOfYear(YearEntityLogic.yearTypeDefinition(value));
-        yearEntity.setId((long) value.hashCode());
+        //yearEntity.setId((long) value.hashCode());
     }
 }

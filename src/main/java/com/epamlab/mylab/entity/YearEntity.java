@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 public class YearEntity implements Comparable<YearEntity> {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "year", nullable = false)
     private Integer year;
